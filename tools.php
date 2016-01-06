@@ -434,6 +434,20 @@ function muffleAlerts($host) {
         return 0;
     }
 }
+
+
+function get_server_detail_link($pos) {
+    $ret_var="<a class=\"btn btn-default\" href=\"details.php?listing=0&amp;server=" . $pos . "\">Details</a>";
+
+    return $ret_var;
+}
+ 
+
+function get_server_expiration_link($pos) {
+    $ret_var="<a class=\"btn btn-default\" href=\"details.php?listing=1&amp;server=" . $pos . "\">Expiration dates</a>";
+
+    return $ret_var;
+}
  
 
 function get_flexlm($server,$pos=0) {
@@ -447,8 +461,8 @@ function get_flexlm($server,$pos=0) {
 
     # for [status]
     $service = "";
-    $detaillink="<a href=\"details.php?listing=0&amp;server=" . $pos . "\">Details</a>" ;
-    $listingexpirationlink="<a href=\"details.php?listing=1&amp;server=" . $pos . "\">Expiration dates</a>" ;
+    $detaillink=get_server_detail_link($pos);
+    $listingexpirationlink=get_server_expiration_link($pos);
     $version="";
     $master="";
     $msg="";
@@ -609,8 +623,8 @@ function get_spm($server,$pos=0) {
     $fp = popen($exec, "r");
 
     $service = "";
-    $clients="<a href=\"details.php?listing=0&amp;server=" . $pos . "\">Details</a>" ;
-    $listing="<a href=\"details.php?listing=1&amp;server=" . $pos . "\">Expiration dates</a>" ;
+    $clients=get_server_detail_link($pos);
+    $listing=get_server_expiration_link($pos);
     $masters=array();
     $version="";
     $msg="";
@@ -724,8 +738,8 @@ function get_rvl($server, $pos=0) {
     $user_array=array();
 
     $service="";
-    $clients="<a href=\"details.php?listing=0&amp;server=".$pos."\">Details</a>";
-    $listing="<a href=\"details.php?listing=1&amp;server=".$pos."\">Expiration dates</a>";
+    $clients=get_server_detail_link($pos);
+    $listing=get_server_expiration_link($pos);
     $master="";
     $version="";
     $msg="";
@@ -883,8 +897,8 @@ function get_sesi($server,$pos=0) {
         if (preg_match("/----- SERVER ([^\s]+).*/", trim($line), $res)) {
             $master=$res[1];
             $service="up";
-            $clients="<a href=\"details.php?listing=0&amp;server=".$pos."\">Details</a>" ;
-            $listing="<a href=\"details.php?listing=1&amp;server=".$pos."\">Expiration dates</a>" ;
+            $clients=get_server_detail_link($pos);
+            $listing=get_server_expiration_link($pos);
             $msg="";
         }
         if (preg_match("/sesinetd: Version (\d+\.\d+\.\d+).*/",trim($line),$res)) {
@@ -986,8 +1000,8 @@ function get_tweak($server, $pos=0) {
         if (preg_match('/RESPONSE:\s+\w+\s+\w+\s+\w+\s+\w+\s+\'(\w+)\'.*$/i',trim($line),$res)) {
             $master=$res[1];
             $service="up";
-            $clients="<a href=\"details.php?listing=0&amp;server=".$pos."\">Details</a>" ;
-            $listing="<a href=\"details.php?listing=1&amp;server=".$pos."\">Expiration dates</a>" ;
+            $clients=get_server_detail_link($pos);
+            $listing=get_server_expiration_link($pos);
             $msg="";
         }
         if (preg_match('/Version:\s+(\d+.\d+.\d+).*/i',trim($line),$res)) {
@@ -1068,8 +1082,8 @@ function get_rlm($server,$pos=0) {
         if (preg_match('/rlm status on ([^\s]+).*/',trim($line),$res)) {
             $master=$res[1];
             $service="up";
-            $clients="<a href=\"details.php?listing=0&amp;server=".$pos."\">Details</a>" ;
-            $listing="<a href=\"details.php?listing=1&amp;server=".$pos."\">Expiration dates</a>" ;
+            $clients=get_server_detail_link($pos);
+            $listing=get_server_expiration_link($pos);
             $msg="";
         }
         if (preg_match('/rlm software version v(\d+.\d+).*/',trim($line),$res)) {
@@ -1179,8 +1193,8 @@ function get_pixar($server,$pos=0) {
         ### START STATUS ###
         if (preg_match("/(\w+)\s(\w\d.\d)\s.*/",$line,$res)) {
             $service = "up";
-            $clients="<a href=\"details.php?listing=0&amp;server=".$pos."\">Details</a>";
-            $listing="<a href=\"details.php?listing=1&amp;server=".$pos."\">Expiration dates</a>";
+            $clients=get_server_detail_link($pos);
+            $listing=get_server_expiration_link($pos);
             $version = $res[2];
             $msg="";
         }

@@ -11,23 +11,9 @@ img{
 	border: none;
 }
 
-body{
-	background: #ffffff;
-}
-
-table{
-	background: #ffffff;
-	margin: 0 auto;
-	font-size: 10pt;
-}
-
-th{
-	background: #dddddd;
-}
-
-td{
-	/*font-size: 14pt;*/
-	text-align: center;
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
 }
 
 td.already_expired{
@@ -53,21 +39,6 @@ a.version{
 	font-style: italic;
 }
 
-.error
-      {
-         padding   : 10px;
-         border    : 5px solid red;
-      }
-.warning
-      {
-         padding   : 10px;
-         border    : 5px solid yellow;
-      }
-.ok
-      {
-         padding   : 10px;
-         border    : 5px solid green;
-      }
 div#msg { 
     margin-left:auto;
     margin-right:auto;
