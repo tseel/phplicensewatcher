@@ -462,7 +462,7 @@ function get_flexlm($server,$pos=0) {
         $line=fgets($fp,1024);
 
         # is it up? build [status]
-        if (preg_match("/^(\w+|\w+\.\w+\.\w+): license server UP.*(\w\d+\.\d+).*/",trim($line),$res)) {
+        if (preg_match("/([^\s]+): license server UP.*v(\d+\.\d+\.\d+).*/", trim($line), $res)) {
             $service="up";
             $master=$res[1];
             if (strpos($res[1],'.')) {
@@ -622,7 +622,7 @@ function get_spm($server,$pos=0) {
         ### START STATS ###
 
         /* Look for an expression like this ie. SPM-daemon on 'spmhost(spmhost.domain.com)' */
-        if (preg_match("/SPM-daemon on \'(\w+).*/", $line,$res ) ) {
+        if (preg_match("/SPM-daemon on \'([^\s]+).*/", $line,$res ) ) {
             $service = "up";
             $master=$res[1];
             array_push($masters,$master);
@@ -743,10 +743,10 @@ function get_rvl($server, $pos=0) {
         if (preg_match("/RE:Vision Effects Floating License Status (\d+\.\d+)/",$line,$res)) {
             $d_version=$res[1];
         }
-        if (preg_match("/License #1/",$line,$res)) {
+        if (preg_match("/License #1/", $line, $res)) {
             $service="up";
         }
-        if (preg_match("/Server: (\w+).*/",$line,$res)) {
+        if (preg_match("/Server: ([^\s]+).*/", $line, $res)) {
             $master=$res[1];
         }
         if (preg_match("/Could not find network license information/",$line,$res)) {
@@ -880,7 +880,7 @@ function get_sesi($server,$pos=0) {
 
         ### START STATUS ###
 
-        if (preg_match("/----- SERVER (\w+).*/",trim($line),$res)) {
+        if (preg_match("/----- SERVER ([^\s]+).*/", trim($line), $res)) {
             $master=$res[1];
             $service="up";
             $clients="<a href=\"details.php?listing=0&amp;server=".$pos."\">Details</a>" ;
@@ -1065,14 +1065,14 @@ function get_rlm($server,$pos=0) {
         $line = fgets ($fp,1024);
 
         ### START STATUS ###
-        if (preg_match('/rlm status on (\w+).*/',trim($line),$res)) {
+        if (preg_match('/rlm status on ([^\s]+).*/',trim($line),$res)) {
             $master=$res[1];
             $service="up";
             $clients="<a href=\"details.php?listing=0&amp;server=".$pos."\">Details</a>" ;
             $listing="<a href=\"details.php?listing=1&amp;server=".$pos."\">Expiration dates</a>" ;
             $msg="";
         }
-        if (preg_match('/rlm software version (\w\d+.\d+).*/',trim($line),$res)) {
+        if (preg_match('/rlm software version v(\d+.\d+).*/',trim($line),$res)) {
         $version=$res[1];
         }
         #check for failed ISV
@@ -1184,7 +1184,7 @@ function get_pixar($server,$pos=0) {
             $version = $res[2];
             $msg="";
         }
-        if (preg_match("/hostinfo:\s+(\w+)\s.*/",$line,$res)) {
+        if (preg_match("/hostinfo:\s+([^\s]+)\s.*/",$line,$res)) {
             $master = $res[1];
         }
         ### END STATUS
